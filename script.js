@@ -88,12 +88,15 @@ const upperCasedCharacters = [
   'Z'
 ];
 
-const finalPassword = ''
-const optionPool = []
-let preferences = []
+var finalPassword = ''
+var optionPool = []
+var validOptions = []
 
 // Function to prompt user for password options
 function getPasswordOptions() {
+
+  let preferences = []
+
   let prefLength = prompt("Password Options: Length (type a number from 8 to 128)")
   if (isNaN(Number(prefLength)) === true) {
     alert("Sorry, that's not a number. Please try again.");
@@ -109,7 +112,6 @@ function getPasswordOptions() {
   }
   else {
     preferences.push(Math.round(Number(prefLength)))
-    console.log(preferences)
   }
 
   let prefSpecial = confirm("Password Options: Would you like Special Characters?")
@@ -128,16 +130,21 @@ function getPasswordOptions() {
     alert("You need to pick at least 1 option after your length. Please try again.");
     return;
   }
+
   console.log(preferences)
-  
+  validOptions = preferences
   return
 }
- getPasswordOptions()
+
 
 // Function for getting a random element from an array
 function getRandom(arr) {
-
+  let x = arr[(Math.floor(Math.random() * arr.length))]
+  return x
 }
+console.log(getRandom(upperCasedCharacters))
+
+
 
 // Function to generate password with user input
 function generatePassword() {
