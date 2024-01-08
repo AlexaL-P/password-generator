@@ -193,9 +193,9 @@ const generateBtn = document.querySelector('#generate');
 // Write password to the #password input
 function writePassword() {
   getPasswordOptions()
-  const password = generatePassword();
-  const passwordText = document.querySelector('#password');
-  passwordText.value = password;
+  generatePassword()
+  const passwordText = document.querySelector('#password')
+  passwordText.value = finalPassword
 
   console.log(finalPassword)
 
