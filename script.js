@@ -88,9 +88,9 @@ const upperCasedCharacters = [
   'Z'
 ];
 
-var finalPassword = ''
-var optionPool = []
-var validOptions = []
+let finalPassword = ''
+let optionPool = []
+let validOptions = []
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -142,14 +142,51 @@ function getRandom(arr) {
   let x = arr[(Math.floor(Math.random() * arr.length))]
   return x
 }
-console.log(getRandom(upperCasedCharacters))
-
 
 
 // Function to generate password with user input
 function generatePassword() {
 
+  let guaranteedChars = 0
+
+  if (validOptions[1] === true) {
+    guaranteedChars++;
+    finalPassword += finalPassword.concat(getRandom(specialCharacters));
+    for (let i = 0; i < specialCharacters.length; i++) {
+      optionPool.push(specialCharacters[i]);
+    }
+  }
+  if (validOptions[2] === true) {
+    guaranteedChars++;
+    finalPassword += finalPassword.concat(getRandom(numericCharacters));
+    for (let i = 0; i < numericCharacters.length; i++) {
+      optionPool.push(numericCharacters[i]);
+    }
+  }
+  if (validOptions[3] === true) {
+    guaranteedChars++;
+    finalPassword += finalPassword.concat(getRandom(lowerCasedCharacters));
+    for (let i = 0; i < lowerCasedCharacters.length; i++) {
+      optionPool.push(lowerCasedCharacters[i]);
+    }
+  }
+  if (validOptions[4] === true) {
+    guaranteedChars++;
+    finalPassword += finalPassword.concat(getRandom(upperCasedCharacters));
+    for (let i = 0; i < upperCasedCharacters.length; i++) {
+      optionPool.push(upperCasedCharacters[i]);
+    }
+  }
+
+
+
 }
+
+getPasswordOptions()
+generatePassword()
+
+console.log(optionPool)
+console.log(finalPassword)
 
 // Get references to the #generate element
 const generateBtn = document.querySelector('#generate');
