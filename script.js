@@ -91,6 +91,7 @@ const upperCasedCharacters = [
 let finalPassword = ''
 let optionPool = []
 let validOptions = []
+let validLength = 0
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -133,6 +134,7 @@ function getPasswordOptions() {
 
   console.log(preferences)
   validOptions = preferences
+  validLength = prefLength
   return
 }
 
@@ -151,52 +153,56 @@ function generatePassword() {
 
   if (validOptions[1] === true) {
     guaranteedChars++;
-    finalPassword += finalPassword.concat(getRandom(specialCharacters));
+    finalPassword = finalPassword.concat(getRandom(specialCharacters));
     for (let i = 0; i < specialCharacters.length; i++) {
       optionPool.push(specialCharacters[i]);
     }
   }
   if (validOptions[2] === true) {
     guaranteedChars++;
-    finalPassword += finalPassword.concat(getRandom(numericCharacters));
+    finalPassword = finalPassword.concat(getRandom(numericCharacters));
     for (let i = 0; i < numericCharacters.length; i++) {
       optionPool.push(numericCharacters[i]);
     }
   }
   if (validOptions[3] === true) {
     guaranteedChars++;
-    finalPassword += finalPassword.concat(getRandom(lowerCasedCharacters));
+    finalPassword = finalPassword.concat(getRandom(lowerCasedCharacters));
     for (let i = 0; i < lowerCasedCharacters.length; i++) {
       optionPool.push(lowerCasedCharacters[i]);
     }
   }
   if (validOptions[4] === true) {
     guaranteedChars++;
-    finalPassword += finalPassword.concat(getRandom(upperCasedCharacters));
+    finalPassword = finalPassword.concat(getRandom(upperCasedCharacters));
     for (let i = 0; i < upperCasedCharacters.length; i++) {
       optionPool.push(upperCasedCharacters[i]);
     }
   }
 
-
+  for (let i = 0; i < (validLength - guaranteedChars); i++) {
+    finalPassword = finalPassword.concat(getRandom(optionPool))
+  }
 
 }
 
-getPasswordOptions()
-generatePassword()
-
-console.log(optionPool)
-console.log(finalPassword)
 
 // Get references to the #generate element
 const generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
+  getPasswordOptions()
   const password = generatePassword();
   const passwordText = document.querySelector('#password');
-
   passwordText.value = password;
+
+  console.log(finalPassword)
+
+  finalPassword = ''
+  optionPool = []
+  validOptions = []
+  validLength = 0
 }
 
 // Add event listener to generate button
